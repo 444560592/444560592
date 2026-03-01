@@ -22,6 +22,15 @@ def divide(a, b):
 
 
 def calculator():
+    """
+    运行交互式命令行计算器。
+    用户依次输入 '数字 运算符 数字' 形式的表达式，程序输出计算结果。
+    输入 'q' 退出程序。
+
+    Runs an interactive command-line calculator.
+    The user enters expressions in the form 'number operator number' and the
+    program prints the result. Enter 'q' to quit.
+    """
     print("欢迎使用简单计算器 / Welcome to Simple Calculator")
     print("支持操作: +  -  *  /  (输入 'q' 退出 / Enter 'q' to quit)")
     print("-" * 50)
