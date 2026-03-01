@@ -1,0 +1,84 @@
+<view class="container">
+  <!-- ── Config panel (shown before starting) ── -->
+  <view class="config-wrap" wx:if="{{phase === 'config'}}">
+    <view class="cfg-card">
+      <text class="cfg-title">⚙️ 输液设置</text>
+
+      <view class="cfg-row">
+        <text class="cfg-lbl">输液袋数</text>
+        <view class="bag-row">
+          <view class="bag-opt {{bagCount === item ? 'bag-sel' : ''}}"
+                wx:for="{{[1,2,3,4,5]}}" wx:key="*this"
+                bindtap="setBags" data-n="{{item}}">
+            {{item}}袋
+          </view>
+        </view>
+      </view>
+
+      <view class="cfg-row">
+        <text class="cfg-lbl">每袋时长</text>
+        <view class="min-wrap">
+          <input type="number" class="min-input"
+                 value="{{minutesPerBag}}" bindinput="onMinInput" />
+          <text class="min-unit">分钟</text>
+        </view>
+      </view>
+
+      <view class="cfg-total">
+        预计总时长：<text class="cfg-total-val">{{bagCount * minutesPerBag}} 分钟</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- ── Timer display (running / paused / done) ── -->
+  <view class="timer-wrap" wx:if="{{phase !== 'config'}}">
+    <!-- Bag progress indicators -->
+    <view class="bag-dots">
+      <view class="b-dot {{item.done ? 'b-done' : item.active ? 'b-active' : 'b-wait'}}"
+            wx:for="{{bags}}" wx:key="n">
+        {{item.n}}
+      </view>
+    </view>
+
+    <!-- Big countdown face -->
+    <view class="timer-face
+                 {{phase === 'paused' ? 'face-paused' : ''}}
+                 {{phase === 'done'   ? 'face-done'   : ''}}">
+      <text class="timer-num">{{displayTime}}</text>
+      <text class="timer-sub">第 {{currentBag}} 袋 / 共 {{bagCount}} 袋</text>
+    </view>
+
+    <!-- Progress bar -->
+    <view class="prog-wrap">
+      <view class="prog-fill" style="width:{{progress}}%"></view>
+    </view>
+    <text class="prog-pct">已完成 {{progress}}%</text>
+  </view>
+
+  <!-- ── Controls (always visible) ── -->
+  <view class="ctrl-row">
+    <view class="ctrl-btn c-secondary" bindtap="reset"
+          wx:if="{{phase !== 'config'}}">
+      重置
+    </view>
+    <view class="ctrl-btn c-primary
+                 {{phase === 'running' ? 'c-pause' : ''}}"
+          bindtap="startPause"
+          wx:if="{{phase !== 'done'}}">
+      {{phase === 'running' ? '暂停' : phase === 'paused' ? '继续' : '开始'}}
+    </view>
+    <view class="ctrl-btn c-secondary" bindtap="reset"
+          wx:if="{{phase === 'done'}}">
+      重新开始
+    </view>
+  </view>
+
+  <!-- ── Tips ── -->
+  <view class="tips-card">
+    <text class="tips-title">💡 注意事项</text>
+    <text class="tip">• 输液期间保持手臂放松，避免过度弯曲</text>
+    <text class="tip">• 穿刺处出现红肿或疼痛，请立即告知护士</text>
+    <text class="tip">• 不要自行调节输液速度</text>
+    <text class="tip">• 如有发热、皮疹等不适，立即通知医护人员</text>
+  </view>
+</view>
