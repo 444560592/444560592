@@ -1,0 +1,61 @@
+/* app.wxss — 全局样式 */
+page {
+  background: #F0F4F8;
+  font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  color: #1a1a2e;
+  font-size: 28rpx;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  min-height: 100vh;
+  padding-bottom: 120rpx;
+}
+
+.card {
+  background: #fff;
+  border-radius: 20rpx;
+  margin: 20rpx 30rpx;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+  padding: 24rpx 30rpx 8rpx;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80rpx 40rpx;
+}
+
+.empty-icon {
+  font-size: 80rpx;
+  margin-bottom: 20rpx;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #999;
+  text-align: center;
+}
+
+.empty-sub {
+  font-size: 24rpx;
+  color: #bbb;
+  margin-top: 8rpx;
+  text-align: center;
+}
+
+/* Shared task status badge colours */
+.status-pending { background: #E3F2FD; color: #1565C0; }
+.status-doing   { background: #FFF3E0; color: #E65100; }
+.status-done    { background: #E8F5E9; color: #2E7D32; }

@@ -1,0 +1,86 @@
+<view class="container">
+  <!-- Hero header -->
+  <view class="hero">
+    <view class="hero-left">
+      <text class="greeting">{{greeting}}，{{patientName || '家长'}}</text>
+      <text class="hero-date">{{currentDate}}</text>
+    </view>
+    <view class="hero-stats">
+      <view class="stat">
+        <text class="stat-n {{pendingCount > 0 ? 'warn' : ''}}">{{pendingCount}}</text>
+        <text class="stat-l">待办</text>
+      </view>
+      <view class="stat-sep"></view>
+      <view class="stat">
+        <text class="stat-n done-clr">{{doneCount}}</text>
+        <text class="stat-l">完成</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- Active infusion banner -->
+  <view class="infusion-banner" wx:if="{{infusionActive}}" bindtap="goInfusion">
+    <text class="ib-icon">💉</text>
+    <view class="ib-body">
+      <text class="ib-title">输液进行中</text>
+      <view class="ib-bar-wrap">
+        <view class="ib-bar-fill" style="width:{{infusionProgress}}%"></view>
+      </view>
+      <text class="ib-remain">剩余 {{infusionRemain}}</text>
+    </view>
+    <text class="ib-arrow">›</text>
+  </view>
+
+  <!-- Quick actions -->
+  <view class="section-title">快捷操作</view>
+  <view class="action-grid">
+    <view class="ac blue" bindtap="goTasks">
+      <text class="ac-icon">📋</text>
+      <text class="ac-lbl">任务清单</text>
+    </view>
+    <view class="ac teal" bindtap="goInfusion">
+      <text class="ac-icon">⏱️</text>
+      <text class="ac-lbl">输液计时</text>
+    </view>
+    <view class="ac amber" bindtap="goTasks">
+      <text class="ac-icon">➕</text>
+      <text class="ac-lbl">添加任务</text>
+    </view>
+    <view class="ac red" bindtap="callNurse">
+      <text class="ac-icon">🆘</text>
+      <text class="ac-lbl">叫护士</text>
+    </view>
+  </view>
+
+  <!-- Pending tasks preview -->
+  <view wx:if="{{pendingTasks.length > 0}}">
+    <view class="section-title">待办任务</view>
+    <view class="card p0">
+      <view class="p-item" wx:for="{{pendingTasks}}" wx:key="id" bindtap="goTasks">
+        <view class="p-dot {{item.priority === 'high' ? 'dot-red' : 'dot-blue'}}"></view>
+        <view class="p-body">
+          <text class="p-name">{{item.name}}</text>
+          <text class="p-loc">📍 {{item.location}}</text>
+        </view>
+        <view class="p-badge status-{{item.status}}">{{item.statusLabel}}</view>
+      </view>
+      <view class="show-all" bindtap="goTasks" wx:if="{{pendingCount > 3}}">
+        还有 {{pendingCount - 3}} 项，查看全部 ›
+      </view>
+    </view>
+  </view>
+
+  <!-- All done -->
+  <view class="empty-state" wx:if="{{allDone}}">
+    <text class="empty-icon">🎉</text>
+    <text class="empty-text">所有任务都完成了！</text>
+    <text class="empty-sub">宝贝辛苦了，好好休息 ❤️</text>
+  </view>
+
+  <!-- No tasks yet -->
+  <view class="empty-state" wx:if="{{noTasks}}">
+    <text class="empty-icon">🏥</text>
+    <text class="empty-text">还没有就诊任务</text>
+    <text class="empty-sub">点击「任务清单」开始添加</text>
+  </view>
+</view>

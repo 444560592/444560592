@@ -1,0 +1,215 @@
+/* pages/infusion/infusion.wxss */
+
+.container {
+  background: #F0F4F8;
+  min-height: 100vh;
+  padding-bottom: 60rpx;
+}
+
+/* ── Config ─────────────────────────────────────────────────────────────── */
+.config-wrap { padding: 30rpx; }
+
+.cfg-card {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 36rpx 30rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
+}
+
+.cfg-title {
+  display: block;
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 36rpx;
+}
+
+.cfg-row   { margin-bottom: 36rpx; }
+
+.cfg-lbl {
+  display: block;
+  font-size: 28rpx;
+  color: #555;
+  margin-bottom: 16rpx;
+}
+
+.bag-row {
+  display: flex;
+  gap: 16rpx;
+  flex-wrap: wrap;
+}
+
+.bag-opt {
+  padding: 16rpx 28rpx;
+  border-radius: 40rpx;
+  border: 2rpx solid #ddd;
+  font-size: 28rpx;
+  color: #666;
+  background: #fff;
+}
+
+.bag-opt.bag-sel {
+  background: #1565C0;
+  color: #fff;
+  border-color: #1565C0;
+}
+
+.min-wrap {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.min-input {
+  width: 160rpx;
+  background: #F5F7FA;
+  border-radius: 12rpx;
+  padding: 18rpx 24rpx;
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #1565C0;
+  text-align: center;
+}
+
+.min-unit { font-size: 28rpx; color: #555; }
+
+.cfg-total {
+  background: #E3F2FD;
+  border-radius: 12rpx;
+  padding: 20rpx 24rpx;
+  font-size: 28rpx;
+  color: #555;
+}
+
+.cfg-total-val { font-weight: 700; color: #1565C0; }
+
+/* ── Timer ──────────────────────────────────────────────────────────────── */
+.timer-wrap { padding: 30rpx 30rpx 0; }
+
+.bag-dots {
+  display: flex;
+  justify-content: center;
+  gap: 20rpx;
+  margin-bottom: 30rpx;
+}
+
+.b-dot {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26rpx;
+  font-weight: 600;
+}
+
+.b-done   { background: #4CAF50; color: #fff; }
+.b-active { background: #1565C0; color: #fff; }
+.b-wait   { background: #ddd;    color: #888; }
+
+.timer-face {
+  background: linear-gradient(135deg, #1565C0, #0288D1);
+  border-radius: 30rpx;
+  padding: 60rpx 40rpx;
+  text-align: center;
+  margin-bottom: 24rpx;
+  box-shadow: 0 8rpx 32rpx rgba(21, 101, 192, 0.35);
+}
+
+.timer-face.face-paused {
+  background: linear-gradient(135deg, #546E7A, #78909C);
+  box-shadow: 0 8rpx 32rpx rgba(84, 110, 122, 0.35);
+}
+
+.timer-face.face-done {
+  background: linear-gradient(135deg, #2E7D32, #43A047);
+  box-shadow: 0 8rpx 32rpx rgba(46, 125, 50, 0.35);
+}
+
+.timer-num {
+  display: block;
+  font-size: 96rpx;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 4rpx;
+  font-variant-numeric: tabular-nums;
+}
+
+.timer-sub {
+  display: block;
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 12rpx;
+}
+
+.prog-wrap {
+  height: 12rpx;
+  background: #E0E0E0;
+  border-radius: 6rpx;
+  overflow: hidden;
+  margin-bottom: 8rpx;
+}
+
+.prog-fill {
+  height: 100%;
+  background: #1565C0;
+  border-radius: 6rpx;
+  transition: width 0.8s linear;
+}
+
+.prog-pct {
+  display: block;
+  text-align: right;
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 30rpx;
+}
+
+/* ── Controls ───────────────────────────────────────────────────────────── */
+.ctrl-row {
+  display: flex;
+  gap: 20rpx;
+  padding: 0 30rpx;
+  margin-bottom: 30rpx;
+  justify-content: center;
+}
+
+.ctrl-btn {
+  flex: 1;
+  text-align: center;
+  padding: 28rpx;
+  border-radius: 16rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  max-width: 300rpx;
+}
+
+.c-primary   { background: #1565C0; color: #fff; }
+.c-pause     { background: #546E7A; color: #fff; }
+.c-secondary { background: #ECEFF1; color: #546E7A; max-width: 200rpx; }
+
+/* ── Tips ───────────────────────────────────────────────────────────────── */
+.tips-card {
+  margin: 0 30rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
+}
+
+.tips-title {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 16rpx;
+}
+
+.tip {
+  display: block;
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.8;
+  margin-bottom: 6rpx;
+}

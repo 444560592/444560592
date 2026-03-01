@@ -1,0 +1,107 @@
+<view class="container">
+  <!-- Filter tabs -->
+  <view class="filter-bar">
+    <view class="f-tab {{activeFilter==='all'?'active':''}}"
+          bindtap="setFilter" data-filter="all">
+      全部 ({{totalCount}})
+    </view>
+    <view class="f-tab {{activeFilter==='pending'?'active':''}}"
+          bindtap="setFilter" data-filter="pending">
+      待办 ({{pendingCount}})
+    </view>
+    <view class="f-tab {{activeFilter==='done'?'active':''}}"
+          bindtap="setFilter" data-filter="done">
+      完成 ({{doneCount}})
+    </view>
+  </view>
+
+  <!-- Task list -->
+  <view class="task-list">
+    <view class="task-card" wx:for="{{displayTasks}}" wx:key="id">
+      <view class="tc-check status-{{item.status}}"
+            bindtap="toggleStatus" data-id="{{item.id}}">
+        <text class="tc-ico">
+          {{item.status === 'done' ? '✓' : item.status === 'doing' ? '◎' : '○'}}
+        </text>
+      </view>
+      <view class="tc-body">
+        <text class="tc-name {{item.status === 'done' ? 'done-text' : ''}}">{{item.name}}</text>
+        <text class="tc-loc">📍 {{item.location}}</text>
+        <view class="tc-badge status-{{item.status}}">{{item.statusLabel}}</view>
+      </view>
+      <view class="tc-del" catchtap="deleteTask" data-id="{{item.id}}">🗑</view>
+    </view>
+
+    <view class="empty-state" wx:if="{{displayTasks.length === 0}}">
+      <text class="empty-icon">📋</text>
+      <text class="empty-text">暂无任务</text>
+      <text class="empty-sub">点击右下角 ＋ 添加任务</text>
+    </view>
+  </view>
+
+  <!-- Clear done button -->
+  <view class="clear-bar"
+        wx:if="{{doneCount > 0 && activeFilter !== 'pending'}}">
+    <view class="clear-btn" bindtap="clearDone">
+      清除已完成 ({{doneCount}})
+    </view>
+  </view>
+
+  <!-- FAB add button -->
+  <view class="fab" bindtap="openModal">＋</view>
+
+  <!-- Mask -->
+  <view class="mask" wx:if="{{showModal}}" bindtap="closeModal"></view>
+
+  <!-- Add task bottom sheet -->
+  <view class="bs {{showModal ? 'bs-show' : ''}}">
+    <view class="bs-handle"></view>
+    <view class="bs-hdr">
+      <text class="bs-title">添加就诊任务</text>
+      <text class="bs-close" bindtap="closeModal">✕</text>
+    </view>
+
+    <!-- Template picker -->
+    <view class="tpl-toggle" bindtap="toggleTpl">
+      📋 从常用模板选择 {{showTpl ? '▲' : '▼'}}
+    </view>
+    <scroll-view scroll-y class="tpl-list" wx:if="{{showTpl}}"
+                 style="max-height:280rpx;">
+      <view class="tpl-item"
+            wx:for="{{templates}}" wx:key="name"
+            bindtap="useTpl" data-idx="{{index}}">
+        <text class="tpl-name">{{item.name}}</text>
+        <text class="tpl-loc">{{item.location}}</text>
+      </view>
+    </scroll-view>
+
+    <!-- Form -->
+    <view class="form-row">
+      <text class="form-lbl">任务名称 <text class="req">*</text></text>
+      <input class="form-inp"
+             placeholder="如：取药、抽血化验…"
+             value="{{newName}}"
+             bindinput="onNameIn" />
+    </view>
+    <view class="form-row">
+      <text class="form-lbl">就诊地点</text>
+      <input class="form-inp"
+             placeholder="如：一楼药房、检验科采血室"
+             value="{{newLoc}}"
+             bindinput="onLocIn" />
+    </view>
+    <view class="form-row">
+      <text class="form-lbl">优先级</text>
+      <view class="pri-row">
+        <view class="pri-btn p-high {{newPri==='high'?'sel':''}}"
+              bindtap="setPri" data-p="high">🔴 紧急</view>
+        <view class="pri-btn p-norm {{newPri==='normal'?'sel':''}}"
+              bindtap="setPri" data-p="normal">🔵 普通</view>
+      </view>
+    </view>
+
+    <view class="bs-foot">
+      <view class="confirm-btn" bindtap="confirmAdd">确认添加</view>
+    </view>
+  </view>
+</view>
